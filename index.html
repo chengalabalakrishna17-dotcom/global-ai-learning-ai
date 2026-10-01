@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOBAL AI LEARNING | Bala Krishna</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#07111f;
+ color:#fff;
+}
+header{
+ background:linear-gradient(135deg,#102a43,#0b5cff);
+ padding:22px;
+ text-align:center;
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+header h1{margin:0;font-size:27px}
+header p{margin:7px 0 0;color:#dbeafe}
+
+nav{
+ display:flex;
+ gap:8px;
+ justify-content:center;
+ flex-wrap:wrap;
+ padding:12px;
+ background:#0a1728;
+ position:sticky;
+ top:88px;
+ z-index:9;
+}
+nav button,.btn{
+ border:0;
+ padding:11px 16px;
+ border-radius:9px;
+ background:#17304d;
+ color:white;
+ cursor:pointer;
+ font-weight:bold;
+}
+nav button:hover,.btn:hover{background:#2563eb}
+
+.container{
+ max-width:1100px;
+ margin:auto;
+ padding:20px;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+ padding:35px 20px;
+ background:linear-gradient(135deg,#10233c,#111827);
+ border-radius:18px;
+ margin-bottom:20px;
+}
+.hero h2{font-size:32px;margin-top:0}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:16px;
+}
+
+.card{
+ background:#0f2035;
+ border:1px solid #1d3a59;
+ border-radius:15px;
+ padding:20px;
+}
+.card h3{margin-top:0}
+.card p{color:#cbd5e1;line-height:1.6}
+
+.progressBox{
+ background:#0f2035;
+ padding:20px;
+ border-radius:15px;
+ margin:20px 0;
+}
+.progress{
+ height:15px;
+ background:#26384c;
+ border-radius:20px;
+ overflow:hidden;
+}
+.progressBar{
+ height:100%;
+ width:0%;
+ background:#22c55e;
+ transition:.4s;
+}
+
+.task{
+ background:#0f2035;
+ border:1px solid #1e3a5f;
+ border-radius:14px;
+ padding:18px;
+ margin:12px 0;
+}
+.task.completed{border-color:#22c55e}
+.task button{margin-top:10px}
+
+.lesson{
+ background:#0f2035;
+ border-radius:16px;
+ padding:25px;
+ line-height:1.7;
+}
+.lesson h2{color:#60a5fa}
+.lesson h3{color:#34d399}
+.code{
+ background:#020617;
+ padding:18px;
+ border-radius:10px;
+ overflow:auto;
+ color:#a7f3d0;
+ white-space:pre-wrap;
+}
+
+.question{
+ background:#111f33;
+ padding:18px;
+ margin:15px 0;
+ border-radius:12px;
+}
+.option{
+ display:block;
+ margin:8px 0;
+ padding:10px;
+ background:#1b3048;
+ border-radius:8px;
+ cursor:pointer;
+}
+.option:hover{background:#244b73}
+
+.result{
+ padding:15px;
+ border-radius:10px;
+ margin-top:15px;
+ font-weight:bold;
+}
+
+footer{
+ text-align:center;
+ padding:30px;
+ color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌐 GLOBAL AI LEARNING</h1>
+<p>Learn • Practice • Build • Track Progress</p>
+</header>
+
+<nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('tasks')">📚 Tasks</button>
+<button onclick="showPage('courses')">💻 Courses</button>
+<button onclick="showPage('quiz')">📝 Quiz</button>
+<button onclick="showPage('progress')">📊 Progress</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+<div class="hero">
+<h2>Welcome 👋</h2>
+<p>Welcome to Global AI Learning. Complete lessons, practice questions and build your programming skills.</p>
+<button class="btn" onclick="showPage('tasks')">Start Learning 🚀</button>
+</div>
+
+<div class="progressBox">
+<h3>Overall Progress</h3>
+<div class="progress">
+<div id="homeProgress" class="progressBar"></div>
+</div>
+<p id="homeProgressText">0% completed</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>🐍 Python</h3>
+<p>Learn Python from basics with examples and practice.</p>
+<button class="btn" onclick="openLesson('python')">Open Python</button>
+</div>
+
+<div class="card">
+<h3>☕ Java</h3>
+<p>Learn Java programming step by step.</p>
+<button class="btn" onclick="openLesson('java')">Open Java</button>
+</div>
+
+<div class="card">
+<h3>💻 C Language</h3>
+<p>Learn C programming from fundamentals.</p>
+<button class="btn" onclick="openLesson('c')">Open C</button>
+</div>
+
+<div class="card">
+<h3>🌐 HTML</h3>
+<p>Build websites using HTML.</p>
+<button class="btn" onclick="openLesson('html')">Open HTML</button>
+</div>
+
+</div>
+</section>
+
+
+<!-- TASKS -->
+<section id="tasks" class="page">
+
+<h2>📚 Learning Tasks</h2>
+
+<div class="progressBox">
+<h3>Task Progress</h3>
+<div class="progress">
+<div id="taskProgress" class="progressBar"></div>
+</div>
+<p id="taskProgressText">0 / 12 completed</p>
+</div>
+
+<div id="taskList"></div>
+
+</section>
+
+
+<!-- COURSES -->
+<section id="courses" class="page">
+
+<h2>💻 Courses</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🐍 Python</h3>
+<p>Variables, conditions, loops, functions and more.</p>
+<button class="btn" onclick="openLesson('python')">Start Course</button>
+</div>
+
+<div class="card">
+<h3>☕ Java</h3>
+<p>Java basics, variables, conditions, loops and OOP.</p>
+<button class="btn" onclick="openLesson('java')">Start Course</button>
+</div>
+
+<div class="card">
+<h3>💻 C</h3>
+<p>C syntax, arrays, strings, functions and pointers.</p>
+<button class="btn" onclick="openLesson('c')">Start Course</button>
+</div>
+
+<div class="card">
+<h3>🌐 HTML</h3>
+<p>HTML structure, elements, forms and websites.</p>
+<button class="btn" onclick="openLesson('html')">Start Course</button>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LESSON -->
+<section id="lessonPage" class="page">
+
+<div id="lessonContent"></div>
+
+<br>
+
+<button class="btn" onclick="showPage('courses')">⬅ Back to Courses</button>
+
+</section>
+
+
+<!-- QUIZ -->
+<section id="quiz" class="page">
+
+<h2>📝 Programming Quiz</h2>
+
+<form id="quizForm">
+
+<div class="question">
+<h3>1. Which language is mainly used to create web page structure?</h3>
+<label class="option">
+<input type="radio" name="q1" value="html"> HTML
+</label>
+<label class="option">
+<input type="radio" name="q1" value="python"> Python
+</label>
+<label class="option">
+<input type="radio" name="q1" value="java"> Java
+</label>
+</div>
+
+<div class="question">
+<h3>2. Which symbol is used to end most C statements?</h3>
+<label class="option">
+<input type="radio" name="q2" value="semicolon"> ;
+</label>
+<label class="option">
+<input type="radio" name="q2" value="colon"> :
+</label>
+<label class="option">
+<input type="radio" name="q2" value="comma"> ,
+</label>
+</div>
+
+<div class="question">
+<h3>3. Which language commonly uses print("Hello")?</h3>
+<label class="option">
+<input type="radio" name="q3" value="python"> Python
+</label>
+<label class="option">
+<input type="radio" name="q3" value="html"> HTML
+</label>
+<label class="option">
+<input type="radio" name="q3" value="css"> CSS
+</label>
+</div>
+
+<div class="question">
+<h3>4. Which HTML tag creates a heading?</h3>
+<label class="option">
+<input type="radio" name="q4" value="h1"> &lt;h1&gt;
+</label>
+<label class="option">
+<input type="radio" name="q4" value="p"> &lt;p&gt;
+</label>
+<label class="option">
+<input type="radio" name="q4" value="div"> &lt;div&gt;
+</label>
+</div>
+
+<div class="question">
+<h3>5. Which keyword is commonly used to create a class in Java?</h3>
+<label class="option">
+<input type="radio" name="q5" value="class"> class
+</label>
+<label class="option">
+<input type="radio" name="q5" value="function"> function
+</label>
+<label class="option">
+<input type="radio" name="q5" value="define"> define
+</label>
+</div>
+
+<button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
+
+</form>
+
+<div id="quizResult"></div>
+
+</section>
+
+
+<!-- PROGRESS -->
+<section id="progress" class="page">
+
+<h2>📊 My Progress</h2>
+
+<div class="progressBox">
+<h3>Overall Completion</h3>
+
+<div class="progress">
+<div id="mainProgress" class="progressBar"></div>
+</div>
+
+<h3 id="mainProgressText">0%</h3>
+</div>
+
+<div id="completedTasks"></div>
+
+<br>
+
+<button class="btn" onclick="resetProgress()">🔄 Reset Progress</button>
+
+</section>
+
+</div>
+
+<footer>
+GLOBAL AI LEARNING © 2026 | Learn and Build 🚀
+</footer>
+
+
+<script>
+
+/* =========================
+   TASK DATA
+========================= */
+
+const tasks = [
+
+{
+id:1,
+title:"HTML Basics",
+course:"html",
+description:"Learn the basic structure of an HTML document."
+},
+
+{
+id:2,
+title:"HTML Elements",
+course:"html",
+description:"Learn headings, paragraphs, links and buttons."
+},
+
+{
+id:3,
+title:"C Variables",
+course:"c",
+description:"Learn how variables store data in C."
+},
+
+{
+id:4,
+title:"C Arrays",
+course:"c",
+description:"Learn how arrays store multiple values."
+},
+
+{
+id:5,
+title:"C Strings",
+course:"c",
+description:"Learn basic string handling in C."
+},
+
+{
+id:6,
+title:"Python Variables",
+course:"python",
+description:"Learn variables and basic data types."
+},
+
+{
+id:7,
+title:"Python Conditions",
+course:"python",
+description:"Learn if, elif and else."
+},
+
+{
+id:8,
+title:"Python Loops",
+course:"python",
+description:"Learn for and while loops."
+},
+
+{
+id:9,
+title:"Java Variables",
+course:"java",
+description:"Learn variables and data types in Java."
+},
+
+{
+id:10,
+title:"Java Conditions",
+course:"java",
+description:"Learn if and else in Java."
+},
+
+{
+id:11,
+title:"Java Loops",
+course:"java",
+description:"Learn loops in Java."
+},
+
+{
+id:12,
+title:"Programming Practice",
+course:"all",
+description:"Complete a mixed programming quiz."
+}
+
+];
+
+
+/* =========================
+   LESSON DATA
+========================= */
+
+const lessons = {
+
+html:{
+
+title:"🌐 HTML Complete Beginner Lesson",
+
+content:`
+
+<h2>HTML Basics</h2>
+
+<p>
+HTML means <b>HyperText Markup Language</b>.
+It is used to create the structure of web pages.
+</p>
+
+<h3>Basic HTML Structure</h3>
+
+<div class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;p&gt;Welcome to my website.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</div>
+
+<h3>Important Tags</h3>
+
+<ul>
+<li>&lt;h1&gt; → Heading</li>
+<li>&lt;p&gt; → Paragraph</li>
+<li>&lt;a&gt; → Link</li>
+<li>&lt;button&gt; → Button</li>
+<li>&lt;img&gt; → Image</li>
+<li>&lt;div&gt; → Section/container</li>
+</ul>
+
+<h3>Practice</h3>
+
+<p>Create a webpage containing:</p>
+
+<ul>
+<li>One heading</li>
+<li>One paragraph</li>
+<li>One button</li>
+</ul>
+
+`
+},
+
+c:{
+
+title:"💻 C Language Lesson",
+
+content:`
+
+<h2>C Programming Basics</h2>
+
+<p>
+C is a general-purpose programming language.
+</p>
+
+<h3>First C Program</h3>
+
+<div class="code">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</div>
+
+<h3>Variables</h3>
+
+<div class="code">int age = 20;
+float price = 99.5;
+char grade = 'A';</div>
+
+<h3>Arrays</h3>
+
+<div class="code">int numbers[5] = {10,20,30,40,50};</div>
+
+<p>
+An array stores multiple values of the same data type.
+</p>
+
+<h3>Strings</h3>
+
+<div class="code">char name[] = "Bala";</div>
+
+<p>
+In C, strings are stored using character arrays.
+</p>
+
+`
+},
+
+python:{
+
+title:"🐍 Python Lesson",
+
+content:`
+
+<h2>Python Basics</h2>
+
+<p>
+Python is a high-level programming language known for simple syntax.
+</p>
+
+<h3>Variables</h3>
+
+<div class="code">name = "Bala"
+age = 20
+
+print(name)
+print(age)</div>
+
+<h3>Condition</h3>
+
+<div class="code">age = 18
+
+if age >= 18:
+    print("Eligible")
+else:
+    print("Not Eligible")</div>
+
+<h3>Loop</h3>
+
+<div class="code">for i in range(5):
+    print(i)</div>
+
+<h3>Why Python?</h3>
+
+<ul>
+<li>Easy syntax</li>
+<li>AI and Machine Learning</li>
+<li>Web development</li>
+<li>Automation</li>
+<li>Data Science</li>
+</ul>
+
+`
+},
+
+java:{
+
+title:"☕ Java Lesson",
+
+content:`
+
+<h2>Java Basics</h2>
+
+<p>
+Java is a popular object-oriented programming language.
+</p>
+
+<h3>First Java Program</h3>
+
+<div class="code">public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello World");
+
+    }
+}</div>
+
+<h3>Variables</h3>
+
+<div class="code">int age = 20;
+
+double price = 99.5;
+
+String name = "Bala";</div>
+
+<h3>Condition</h3>
+
+<div class="code">if(age >= 18) {
+    System.out.println("Eligible");
+} else {
+    System.out.println("Not Eligible");
+}</div>
+
+`
+}
+
+};
+
+
+/* =========================
+   STORAGE
+========================= */
+
+let completed = JSON.parse(
+localStorage.getItem("completedTasks") || "[]"
+);
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(page){
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+const target=document.getElementById(page);
+
+if(target){
+target.classList.add("active");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+updateProgress();
+}
+
+
+/* =========================
+   TASK DISPLAY
+========================= */
+
+function renderTasks(){
+
+const list=document.getElementById("taskList");
+
+list.innerHTML="";
+
+tasks.forEach(task=>{
+
+const isDone=completed.includes(task.id);
+
+const div=document.createElement("div");
+
+div.className="task "+(isDone?"completed":"");
+
+div.innerHTML=`
+
+<h3>
+${isDone?"✅":"📘"} ${task.title}
+</h3>
+
+<p>${task.description}</p>
+
+<button class="btn"
+onclick="startTask(${task.id})">
+
+${isDone?"Review Task":"Start Task"}
+
+</button>
+
+${isDone?
+"<p style='color:#4ade80'>✓ Completed</p>"
+:""}
+
+`;
+
+list.appendChild(div);
+
+});
+
+updateProgress();
+
+}
+
+
+/* =========================
+   START TASK
+========================= */
+
+function startTask(id){
+
+const task=tasks.find(t=>t.id===id);
+
+if(!task)return;
+
+if(task.course==="all"){
+
+showPage("quiz");
+return;
+
+}
+
+openLesson(task.course,id);
+
+}
+
+
+/* =========================
+   OPEN LESSON
+========================= */
+
+function openLesson(course,taskId=null){
+
+const lesson=lessons[course];
+
+if(!lesson)return;
+
+const content=document.getElementById("lessonContent");
+
+content.innerHTML=`
+
+<div class="lesson">
+
+<h2>${lesson.title}</h2>
+
+${lesson.content}
+
+<hr>
+
+<h3>Task Completion</h3>
+
+<p>
+Read the lesson and complete the practice activity.
+When you are ready, mark this task as completed.
+</p>
+
+<button class="btn"
+onclick="completeTask(${taskId || 0})">
+
+${taskId && completed.includes(taskId)
+?"✓ Task Completed"
+:"✅ Mark Task Complete"}
+
+</button>
+
+<div id="completionMessage"></div>
+
+</div>
+
+`;
+
+showPage("lessonPage");
+
+}
+
+
+/* =========================
+   COMPLETE TASK
+========================= */
+
+function completeTask(taskId){
+
+if(!taskId){
+
+document.getElementById("completionMessage").innerHTML=`
+
+<div class="result" style="background:#123b27;color:#86efac">
+ℹ️ This course lesson is available for learning.
+Choose a specific task from the Tasks page to track completion.
+</div>
+
+`;
+
+return;
+
+}
+
+if(!completed.includes(taskId)){
+
+completed.push(taskId);
+
+localStorage.setItem(
+"completedTasks",
+JSON.stringify(completed)
+);
+
+}
+
+document.getElementById("completionMessage").innerHTML=`
+
+<div class="result" style="background:#123b27;color:#86efac">
+
+🎉 Task completed successfully!
+
+Your progress has been saved.
+
+</div>
+
+`;
+
+renderTasks();
+updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+const total=tasks.length;
+
+const done=completed.length;
+
+const percent=Math.round((done/total)*100);
+
+const bars=[
+"homeProgress",
+"taskProgress",
+"mainProgress"
+];
+
+bars.forEach(id=>{
+
+const bar=document.getElementById(id);
+
+if(bar){
+bar.style.width=percent+"%";
+}
+
+});
+
+const homeText=document.getElementById("homeProgressText");
+
+if(homeText)
+homeText.innerText=percent+"% completed";
+
+
+const taskText=document.getElementById("taskProgressText");
+
+if(taskText)
+taskText.innerText=done+" / "+total+" completed";
+
+
+const mainText=document.getElementById("mainProgressText");
+
+if(mainText)
+mainText.innerText=percent+"%";
+
+
+renderCompleted();
+
+}
+
+
+/* =========================
+   COMPLETED TASKS
+========================= */
+
+function renderCompleted(){
+
+const box=document.getElementById("completedTasks");
+
+if(!box)return;
+
+if(completed.length===0){
+
+box.innerHTML=`
+<div class="card">
+<p>No tasks completed yet.</p>
+</div>
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="card">
+
+<h3>✅ Completed Tasks</h3>
+
+<ul>
+
+${completed.map(id=>{
+
+const task=tasks.find(t=>t.id===id);
+
+return task?
+`<li>${task.title}</li>`:"";
+
+}).join("")}
+
+</ul>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+function submitQuiz(){
+
+const answers={
+
+q1:"html",
+q2:"semicolon",
+q3:"python",
+q4:"h1",
+q5:"class"
+
+};
+
+let score=0;
+
+Object.keys(answers).forEach(q=>{
+
+const selected=
+document.querySelector(
+'input[name="'+q+'"]:checked'
+);
+
+if(selected && selected.value===answers[q]){
+
+score++;
+
+}
+
+});
+
+const result=document.getElementById("quizResult");
+
+result.className="result";
+
+if(score>=4){
+
+result.style.background="#123b27";
+
+result.innerHTML=`
+
+🎉 Excellent!
+
+Your score: ${score}/5
+
+You passed the quiz.
+
+`;
+
+if(!completed.includes(12)){
+
+completed.push(12);
+
+localStorage.setItem(
+"completedTasks",
+JSON.stringify(completed)
+);
+
+}
+
+}else{
+
+result.style.background="#3b2612";
+
+result.innerHTML=`
+
+📚 Your score: ${score}/5
+
+Review the lessons and try again.
+
+`;
+
+}
+
+updateProgress();
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetProgress(){
+
+const confirmReset=
+confirm(
+"Are you sure you want to reset all progress?"
+);
+
+if(!confirmReset)return;
+
+completed=[];
+
+localStorage.removeItem("completedTasks");
+
+renderTasks();
+
+updateProgress();
+
+alert("Progress reset successfully.");
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+renderTasks();
+
+updateProgress();
+
+</script>
+
+</body>
+</html>
